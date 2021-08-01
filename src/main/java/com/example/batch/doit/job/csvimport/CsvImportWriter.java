@@ -32,7 +32,6 @@ public class CsvImportWriter implements ItemWriter<CsvImportVo>, StepExecutionLi
         for(CsvImport csvImport : csvImports){
             log.info("database item : {}",csvImport);
         }
-        log.info("동대동 데이터 완료 : new - {}, update - {}, maintain - {}, total - {}");
         return ExitStatus.COMPLETED;
     }
 
@@ -42,6 +41,5 @@ public class CsvImportWriter implements ItemWriter<CsvImportVo>, StepExecutionLi
             log.info("item : {}",item);
             csvImportRepository.save(CsvImport.from(item));
         }
-        log.info("동대동 데이터 현재 cnt new - {}, update - {}, maintain - {}, total - {}");
     }
 }

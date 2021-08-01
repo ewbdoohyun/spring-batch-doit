@@ -17,7 +17,7 @@ import org.springframework.core.io.ClassPathResource;
 @Configuration
 public class CsvImportJobConfig {
     private static final String JOB_NAME = "csvImportJob";
-    private static final String STEP_NAME = "safeNumberDeallocateStep";
+    private static final String STEP_NAME = "csvImportStep";
     public static final int CHUNK_SIZE = 500;
 
     @Autowired
@@ -34,7 +34,6 @@ public class CsvImportJobConfig {
         return jobBuilderFactory.get(JOB_NAME)
                 .start(csvImportStep())
                 .build();
-
     }
 
     @Bean
@@ -51,7 +50,7 @@ public class CsvImportJobConfig {
     @StepScope
     public FlatFileItemReader<CsvImportVo> csvImportReader() {
         return new FlatFileItemReaderBuilder<CsvImportVo>()
-                .name("addressFareReader")
+                .name("csvImportReader")
                 .resource(new ClassPathResource("data.csv"))
                 .delimited().delimiter(",")
                 .names("id", "name", "description")
