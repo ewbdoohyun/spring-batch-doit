@@ -10,13 +10,17 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
+import static com.example.batch.doit.job.csvimport.config.CsvImportJobConfig.JOB_NAME;
+
 @Configuration
+@ConditionalOnProperty(name = "job.name", havingValue = JOB_NAME)
 public class CsvImportJobConfig {
-    private static final String JOB_NAME = "csvImportJob";
+    public static final String JOB_NAME = "csvImportJob";
     private static final String STEP_NAME = "csvImportStep";
     public static final int CHUNK_SIZE = 500;
 
